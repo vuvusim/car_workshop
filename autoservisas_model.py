@@ -31,10 +31,11 @@ class Autoservisas(Base):
     adresas = Column("adresas", String)
     tel_numeris = Column("tel_numeris", String)
 
-    def __init__(self, pavadinimas, adresas, tel_numeris):
+    def __init__(self, pavadinimas, adresas, tel_numeris, automobilio_id):
         self.pavadinimas = pavadinimas
         self.adresas = adresas
         self.tel_numeris = tel_numeris
+        self.automobilio_id = automobilio_id
 
     def __repr__(self):
         return f"{self.id}, {self.pavadinimas}, {self.adresas}, {self.tel_numeris}"
@@ -51,12 +52,13 @@ class Automobilis(Base):
     savininko_id = Column("savininko_id", Integer, ForeignKey("savininkas.id"))
     savininkas = relationship("Savininkas")
 
-    def __init__(self, gamintojas, modelis, pagaminimo_metai, variklio_turis, variklio_galia):
+    def __init__(self, gamintojas, modelis, pagaminimo_metai, variklio_turis, variklio_galia, savininko_id):
         self.gamintojas = gamintojas
         self.modelis = modelis
         self.pagaminimo_metai = pagaminimo_metai
         self.variklio_turis = variklio_turis
         self.variklio_galia = variklio_galia
+        self.savininko_id = savininko_id
 
     def __repr__(self):
         return f"{self.id}, {self.gamintojas}, {self.modelis}, {self.pagaminimo_metai}, {self.variklio_turis}, {self.variklio_galia}"
