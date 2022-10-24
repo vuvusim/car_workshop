@@ -23,6 +23,10 @@ class Savininkas(Base):
     def __repr__(self):
         return f"{self.id}, {self.vardas} {self.pavarde}, {self.tel_nr}, {self.el_pastas}"
 
+# class Klientas(Base):
+#     __tablename__ = "klientas"
+    
+
 
 class Autoservisas(Base):
     __tablename__ = "autoservisas"
@@ -64,7 +68,7 @@ class Automobilis(Base):
         return f"{self.id}, {self.gamintojas}, {self.modelis}, {self.pagaminimo_metai}, {self.variklio_turis}, {self.variklio_galia}"
 
 
-class Drabuotojas(Base):
+class Darbuotojas(Base):
     __tablename__ = "darbuotojas"
     id = Column(Integer, primary_key=True)
     vardas = Column("vardas", String)
@@ -74,11 +78,12 @@ class Drabuotojas(Base):
     autoserviso_id = Column("autoserviso_id", Integer, ForeignKey("autoservisas.id"))
     autoservisas = relationship("Autoservisas")
 
-    def __init__(self, vardas, pavarde, asmens_kodas, tel_numeris):
+    def __init__(self, vardas, pavarde, asmens_kodas, tel_numeris, autoserviso_id):
         self.vardas = vardas
         self.pavarde = pavarde
         self.asmens_kodas = asmens_kodas
         self.tel_numeris = tel_numeris
+        self.autoserviso_id = autoserviso_id
 
     def __repr__(self):
         return f"{self.vardas} {self.pavarde}, {self.asmens_kodas}, {self.tel_numeris}"

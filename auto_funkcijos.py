@@ -41,6 +41,24 @@ def prideti_automobili():
     session.add(automobilis)
     session.commit()
 
+def pasirinkti_servisa():
+    print("--- Autoservisai ---")
+    servisai = session.query(Autoservisas).all()
+    for servisas in servisai:
+        print(servisas)
+
+def prideti_darbuotoja():
+    pasirinkti_servisa()
+    serviso_id = int(input("Pasirinkite autoserviso ID: "))
+    print("--- Prideti darbuotoja ---")
+    vardas = input("Vardas: ")
+    pavarde = input("Pavarde: ")
+    asmens_kodas = int(input("Asmens kodas: "))
+    tel_numeris = input("Telefono numeris: ")
+    darbuotojas = Darbuotojas(vardas=vardas, pavarde=pavarde, asmens_kodas=asmens_kodas, tel_numeris=tel_numeris, autoserviso_id=serviso_id)
+    session.add(darbuotojas)
+    session.commit()
+
 
 
 
@@ -49,6 +67,7 @@ while True:
     print("1: Prideti asmeni")
     print("2: Prideti autoservisa")
     print("3: Prideti automobili")
+    print("4: Prideti darbuotoja")
     pasirinkimas = int(input())
     if pasirinkimas == 1:
         prideti_savininka()
@@ -56,6 +75,8 @@ while True:
         prideti_autoservisa()
     elif pasirinkimas == 3:
         prideti_automobili()
+    elif pasirinkimas == 4:
+        prideti_darbuotoja()
 
 
 
