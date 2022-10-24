@@ -6,8 +6,9 @@ while True:
     print("2: Prideti automobili")
     print("3: Prideti autoservisa")
     print("4: Prideti darbuotoja")
-    print("5: Perziureti")
-    print("6: Istrinti")
+    print("5: Prideti i autoserviso klientu sarasa")
+    print("6: Perziureti")
+    print("7: Istrinti")
     print("0: Iseiti")
     pasirinkimas = int(input())
     if pasirinkimas == 1:
@@ -19,8 +20,10 @@ while True:
     elif pasirinkimas == 4:
         prideti_darbuotoja()
     elif pasirinkimas == 5:
-        perziura()
+        prideti_i_klientu_sarasa()
     elif pasirinkimas == 6:
+        perziura()
+    elif pasirinkimas == 7:
         istrinti()
     elif pasirinkimas == 0:
         break

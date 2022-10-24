@@ -128,3 +128,20 @@ def istrinti():
         istr_darbuotoja = session.query(Darbuotojas).get(pasirikite)
         session.delete(istr_darbuotoja)
         session.commit()
+
+def prideti_i_klientu_sarasa():
+    klientai = session.query(Savininkas).all()
+    for klientas in klientai:
+        print(klientas)
+    kliento_id = int(input("Pasirinkite kliento ID: "))
+
+    kliento_masina = session.query(Savininkas).get(kliento_id)
+    for masina in kliento_masina.masinos:
+        print(masina)
+    masinos_id = int(input("Pasirinkite automobilio ID: "))
+    klient = Klientas(kliento_id=kliento_id, automobilio_id=masinos_id)
+    session.add(klient)
+    # auto_klient = Autoservisas(kliento_id=klient)
+    # session.add(auto_klient)
+    session.commit()
+

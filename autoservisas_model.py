@@ -24,10 +24,13 @@ class Savininkas(Base):
     def __repr__(self):
         return f"{self.id}, {self.vardas} {self.pavarde}, {self.tel_nr}, {self.el_pastas}"
 
-# class Klientas(Base):
-#     __tablename__ = "klientas"
-    
 
+class Klientas(Base):
+    __tablename__ = "klientas"
+    id = Column(Integer, primary_key=True)
+    kliento_id = Column("kliento_id", Integer, ForeignKey("savininkas.id"))
+    automobilio_id = Column("auto_id", Integer, ForeignKey("automobilis.id"))
+    
 
 class Autoservisas(Base):
     __tablename__ = "autoservisas"
@@ -35,13 +38,14 @@ class Autoservisas(Base):
     pavadinimas = Column("pavadinimas", String)
     adresas = Column("adresas", String)
     tel_numeris = Column("tel_numeris", String)
-    darbuotojai = relationship("Darbuotojai", back_populates="autoservisas")
+    darbuotojai = relationship("Darbuotojas", back_populates="autoservisas")
+    kliento_id = Column("kliento_id", Integer, ForeignKey("klientas.id"))
+    klientai = relationship("Klientas", )
 
     def __init__(self, pavadinimas, adresas, tel_numeris):
         self.pavadinimas = pavadinimas
         self.adresas = adresas
         self.tel_numeris = tel_numeris
-
 
     def __repr__(self):
         return f"{self.id}, {self.pavadinimas}, {self.adresas}, {self.tel_numeris}"
@@ -90,5 +94,6 @@ class Darbuotojas(Base):
     def __repr__(self):
         return f"{self.vardas} {self.pavarde}, {self.asmens_kodas}, {self.tel_numeris}"
 
+        
 if __name__ == "__main__":
     Base.metadata.create_all(engine)
