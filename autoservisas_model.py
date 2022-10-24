@@ -13,6 +13,7 @@ class Savininkas(Base):
     pavarde = Column("pavarde", String)
     tel_nr = Column("tel_numeris", String)
     el_pastas = Column("el_pastas", String, unique=True)
+    masinos = relationship("Automobilis", back_populates="savininkas")
 
     def __init__(self, vardas, pavarde, tel_nr, el_pastas):
         self.vardas = vardas
@@ -34,6 +35,7 @@ class Autoservisas(Base):
     pavadinimas = Column("pavadinimas", String)
     adresas = Column("adresas", String)
     tel_numeris = Column("tel_numeris", String)
+    darbuotojai = relationship("Darbuotojai", back_populates="autoservisas")
 
     def __init__(self, pavadinimas, adresas, tel_numeris):
         self.pavadinimas = pavadinimas
@@ -54,7 +56,7 @@ class Automobilis(Base):
     variklio_turis = Column("variklio_turis_litrais", Float)
     variklio_galia = Column("Variklio_galia_kW", Integer)
     savininko_id = Column("savininko_id", Integer, ForeignKey("savininkas.id"))
-    savininkas = relationship("Savininkas")
+    savininkas = relationship("Savininkas", back_populates="masinos")
 
     def __init__(self, gamintojas, modelis, pagaminimo_metai, variklio_turis, variklio_galia, savininko_id):
         self.gamintojas = gamintojas
@@ -76,7 +78,7 @@ class Darbuotojas(Base):
     asmens_kodas = Column("asmens_kodas", Integer, unique=True)
     tel_numeris = Column("tel_numeris", String)
     autoserviso_id = Column("autoserviso_id", Integer, ForeignKey("autoservisas.id"))
-    autoservisas = relationship("Autoservisas")
+    autoservisas = relationship("Autoservisas", back_populates="darbuotojai")
 
     def __init__(self, vardas, pavarde, asmens_kodas, tel_numeris, autoserviso_id):
         self.vardas = vardas
