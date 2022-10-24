@@ -35,11 +35,11 @@ class Autoservisas(Base):
     adresas = Column("adresas", String)
     tel_numeris = Column("tel_numeris", String)
 
-    def __init__(self, pavadinimas, adresas, tel_numeris, automobilio_id):
+    def __init__(self, pavadinimas, adresas, tel_numeris):
         self.pavadinimas = pavadinimas
         self.adresas = adresas
         self.tel_numeris = tel_numeris
-        self.automobilio_id = automobilio_id
+
 
     def __repr__(self):
         return f"{self.id}, {self.pavadinimas}, {self.adresas}, {self.tel_numeris}"

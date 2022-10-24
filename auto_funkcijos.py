@@ -33,7 +33,7 @@ def prideti_automobili():
     savininkas_id = int(input("Pasirinkite asmens ID: "))
     print("--- Prideti automobili ---")
     gamintojas = input("Gamintojas: ")
-    modelis = input("Modelis")
+    modelis = input("Modelis: ")
     pagaminimo_metai = input("Pagaminimo metai: ")
     variklio_turis = float(input("Variklio turis: "))
     variklio_galia = int(input("Variklio galia: "))
@@ -65,50 +65,66 @@ def perziura():
     print("3: Automobilius")
     print("4: Darbuotojus")
     pasirinkti = int(input("Pasirinkite: "))
+
     if pasirinkti == 1:
         asmenys = session.query(Savininkas).all()
         for asmuo in asmenys:
             print(asmuo)
+
     elif pasirinkti == 2:
         autoservisai = session.query(Autoservisas).all()
         for servisas in autoservisai:
             print(servisas)
+
     elif pasirinkti == 3:
         automobiliai = session.query(Automobilis).all()
         for automobilis in automobiliai:
             print(automobilis)
-    elif pasirinkimas == 4:
+
+    elif pasirinkti == 4:
         darbuotojai = session.query(Darbuotojas).all()
         for darbuotojas in darbuotojai:
             print(darbuotojas)
 
+def istrinti():
+    print("1: Asmeni")
+    print("2: Autoservisa")
+    print("3: Automobili")
+    print("4: Darbuotoja")
+    pasirinkti = int(input("Pasirinkite: "))
 
+    if pasirinkti == 1:
+        asmenys = session.query(Savininkas).all()
+        for asmuo in asmenys:
+            print(asmuo)
+        pasirikite = int(input("Pasirinkite asmens ID:"))
+        istr_asmeni = session.query(Savininkas).get(pasirikite)
+        session.delete(istr_asmeni)
+        session.commit()
 
+    elif pasirinkti == 2:
+        autoservisai = session.query(Autoservisas).all()
+        for servisas in autoservisai:
+            print(servisas)
+        pasirikite = int(input("Pasirinkite autoserviso ID:"))
+        istr_autoserv = session.query(Autoservisas).get(pasirikite)
+        session.delete(istr_autoserv)
+        session.commit()
 
-while True:
-    print("Pasirinkite")
-    print("1: Prideti asmeni")
-    print("2: Prideti autoservisa")
-    print("3: Prideti automobili")
-    print("4: Prideti darbuotoja")
-    print("5: Perziureti")
-    print("0: Iseiti")
-    pasirinkimas = int(input())
-    if pasirinkimas == 1:
-        prideti_savininka()
-    elif pasirinkimas == 2:
-        prideti_autoservisa()
-    elif pasirinkimas == 3:
-        prideti_automobili()
-    elif pasirinkimas == 4:
-        prideti_darbuotoja()
-    elif pasirinkimas == 5:
-        perziura()
-    elif pasirinkimas == 0:
-        break
+    elif pasirinkti == 3:
+        automobiliai = session.query(Automobilis).all()
+        for automobilis in automobiliai:
+            print(automobilis)
+        pasirikite = int(input("Pasirinkite automobilio ID:"))
+        istr_auto = session.query(Automobilis).get(pasirikite)
+        session.delete(istr_auto)
+        session.commit()
 
-
-
-
-
-
+    elif pasirinkti == 4:
+        darbuotojai = session.query(Darbuotojas).all()
+        for darbuotojas in darbuotojai:
+            print(darbuotojas)
+        pasirikite = int(input("Pasirinkite darbuotojo ID:"))
+        istr_darbuotoja = session.query(Darbuotojas).get(pasirikite)
+        session.delete(istr_darbuotoja)
+        session.commit()
