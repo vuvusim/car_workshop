@@ -30,7 +30,8 @@ class Klientas(Base):
     id = Column(Integer, primary_key=True)
     kliento_id = Column("kliento_id", Integer, ForeignKey("savininkas.id"))
     automobilio_id = Column("auto_id", Integer, ForeignKey("automobilis.id"))
-    
+    autoservisai = relationship("Autoservisas", back_populates="klientai")
+
 
 class Autoservisas(Base):
     __tablename__ = "autoservisas"
@@ -40,7 +41,7 @@ class Autoservisas(Base):
     tel_numeris = Column("tel_numeris", String)
     darbuotojai = relationship("Darbuotojas", back_populates="autoservisas")
     kliento_id = Column("kliento_id", Integer, ForeignKey("klientas.id"))
-    klientai = relationship("Klientas", )
+    klientai = relationship("Klientas", back_populates="autoservisai")
 
     def __init__(self, pavadinimas, adresas, tel_numeris):
         self.pavadinimas = pavadinimas

@@ -141,7 +141,23 @@ def prideti_i_klientu_sarasa():
     masinos_id = int(input("Pasirinkite automobilio ID: "))
     klient = Klientas(kliento_id=kliento_id, automobilio_id=masinos_id)
     session.add(klient)
-    # auto_klient = Autoservisas(kliento_id=klient)
-    # session.add(auto_klient)
     session.commit()
+
+def perziurejimas():
+    savininkai = session.query(Savininkas).all()
+    for savininkas in savininkai:
+        print(savininkas)
+    pasirinkimas = int(input("Pasirinkite savininko ID: "))
+    auto = session.query(Savininkas).get(pasirinkimas)
+    for masina in auto.masinos:
+        print(masina)
+
+def perziurejimas2():
+    autoservisai = session.query(Autoservisas).all()
+    for autoservisas in autoservisai:
+        print(autoservisas)
+    pasirinkimas = int(input("Pasirinkite autoserviso ID: "))
+    auto = session.query(Autoservisas).get(pasirinkimas)
+    for darbuotojas in auto.darbuotojai:
+        print(darbuotojas)
 
